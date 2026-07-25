@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>صور KDH</title>
+<title>KDH — Photos</title>
 <meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@600;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -101,7 +101,7 @@
     .grid figure:hover img{transform:scale(1.06);}
   }
   .grid figure.new::after{
-    content:"جديد";
+    content:"NEW";
     position:absolute; top:6px; right:6px;
     background:var(--amber);
     color:#20180a;
@@ -180,20 +180,20 @@
 <body>
 
   <header>
-    <span class="brand">الوكالة</span>
-    <div class="client-name">صور KDH</div>
-    <span class="count" id="countLabel">— صورة</span>
+    <span class="brand">AGENCY</span>
+    <div class="client-name">KDH</div>
+    <span class="count" id="countLabel">— photos</span>
   </header>
 
   <main>
-    <div class="sub">آخر تحديث: اليوم</div>
+    <div class="sub">Last updated: today</div>
     <div class="grid" id="grid"></div>
   </main>
 
-  <footer>هذا الرابط خاص بك — الرجاء عدم مشاركته</footer>
+  <footer>This link is private to you — please don't share it</footer>
 
   <div class="lightbox" id="lightbox">
-    <span class="close" id="closeBtn">إغلاق ✕</span>
+    <span class="close" id="closeBtn">Close ✕</span>
     <span class="nav prev" id="prevBtn">‹</span>
     <img id="lightboxImg" src="" alt="">
     <span class="nav next" id="nextBtn">›</span>
@@ -215,7 +215,7 @@
   /* =================================== */
 
   const grid = document.getElementById('grid');
-  document.getElementById('countLabel').textContent = photos.length + ' صورة';
+  document.getElementById('countLabel').textContent = photos.length + ' photos';
 
   photos.forEach((p, i)=>{
     const fig = document.createElement('figure');
@@ -223,7 +223,7 @@
     const img = document.createElement('img');
     img.src = p.src;
     img.loading = 'lazy';
-    img.alt = 'صورة ' + (i+1);
+    img.alt = 'Photo ' + (i+1);
     fig.appendChild(img);
     fig.addEventListener('click', ()=>openLightbox(i));
     grid.appendChild(fig);
@@ -253,8 +253,8 @@
   function showNext(){ current = (current+1)%photos.length; updateLightbox(); }
 
   document.getElementById('closeBtn').onclick = closeLightbox;
-  document.getElementById('prevBtn').onclick = showNext;   // RTL: السهم الأيمن = التالي بصريًا
-  document.getElementById('nextBtn').onclick = showPrev;
+  document.getElementById('prevBtn').onclick = showPrev;
+  document.getElementById('nextBtn').onclick = showNext;
   lightbox.addEventListener('click', e=>{ if(e.target===lightbox) closeLightbox(); });
   document.addEventListener('keydown', e=>{
     if(!lightbox.classList.contains('open')) return;
