@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>صور KDH</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@600;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#141210;
+    --panel:#1c1a17;
+    --ivory:#efe7d8;
+    --muted:#8f8474;
+    --amber:#cf9c47;
+    --hairline:rgba(239,231,216,0.08);
+  }
+  *{box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg);
+    color:var(--ivory);
+    font-family:'IBM Plex Sans Arabic', sans-serif;
+    min-height:100vh;
+    touch-action:manipulation;
+  }
+  body.locked{overflow:hidden;}
+
+  header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:22px 18px;
+    border-bottom:1px solid var(--hairline);
+    position:sticky; top:0;
+    background:rgba(20,18,16,0.92);
+    backdrop-filter:blur(8px);
+    z-index:10;
+    padding-top:max(22px, env(safe-area-inset-top));
+  }
+  .brand{
+    font-family:'IBM Plex Mono';
+    font-size:10.5px;
+    letter-spacing:.1em;
+    color:var(--muted);
+  }
+  .client-name{
+    font-family:'El Messiri';
+    font-weight:700;
+    font-size:18px;
+    text-align:center;
+  }
+  .count{
+    font-family:'IBM Plex Mono';
+    font-size:10.5px;
+    color:var(--amber);
+    border:1px solid var(--amber);
+    padding:5px 11px;
+    border-radius:20px;
+    white-space:nowrap;
+  }
+
+  main{
+    max-width:1100px;
+    margin:0 auto;
+    padding:22px 14px 60px;
+  }
+  .sub{
+    color:var(--muted);
+    font-size:12.5px;
+    margin-bottom:16px;
+    padding:0 4px;
+  }
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:4px;
+  }
+  @media (min-width:520px){
+    .grid{grid-template-columns:repeat(4, 1fr); gap:6px;}
+  }
+  @media (min-width:800px){
+    .grid{grid-template-columns:repeat(5, 1fr);}
+  }
+  .grid figure{
+    aspect-ratio:1;
+    border-radius:6px;
+    overflow:hidden;
+    cursor:zoom-in;
+    position:relative;
+    background:var(--panel);
+  }
+  .grid img{
+    width:100%; height:100%;
+    object-fit:cover;
+    display:block;
+    transition:transform .4s ease;
+  }
+  @media (hover:hover){
+    .grid figure:hover img{transform:scale(1.06);}
+  }
+  .grid figure.new::after{
+    content:"جديد";
+    position:absolute; top:6px; right:6px;
+    background:var(--amber);
+    color:#20180a;
+    font-family:'IBM Plex Mono';
+    font-size:8.5px;
+    padding:3px 7px;
+    border-radius:20px;
+  }
+
+  .lightbox{
+    position:fixed; inset:0;
+    background:rgba(10,9,8,0.97);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:100;
+    touch-action:pan-y;
+  }
+  .lightbox.open{display:flex;}
+  .lightbox img{
+    max-width:92vw;
+    max-height:78vh;
+    border-radius:6px;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,0.6);
+    user-select:none;
+    -webkit-user-drag:none;
+  }
+  .lightbox .close{
+    position:absolute;
+    top:max(20px, env(safe-area-inset-top));
+    left:20px;
+    color:var(--muted);
+    font-family:'IBM Plex Mono';
+    font-size:12px;
+    cursor:pointer;
+    border:1px solid var(--hairline);
+    padding:9px 14px;
+    border-radius:20px;
+  }
+  .lightbox .close:hover{color:var(--ivory); border-color:var(--amber);}
+  .lightbox .nav{
+    position:absolute; top:50%; transform:translateY(-50%);
+    color:var(--ivory);
+    font-size:20px;
+    cursor:pointer;
+    width:44px; height:44px;
+    display:flex; align-items:center; justify-content:center;
+    border-radius:50%;
+    background:rgba(239,231,216,0.06);
+  }
+  .lightbox .nav:hover{background:rgba(239,231,216,0.14);}
+  .lightbox .prev{right:14px;}
+  .lightbox .next{left:14px;}
+  .lightbox .counter{
+    position:absolute;
+    bottom:max(20px, env(safe-area-inset-bottom));
+    left:50%; transform:translateX(-50%);
+    font-family:'IBM Plex Mono'; font-size:11px; color:var(--muted);
+  }
+
+  footer{
+    text-align:center;
+    padding:18px;
+    color:var(--muted);
+    font-size:10.5px;
+    font-family:'IBM Plex Mono';
+    border-top:1px solid var(--hairline);
+  }
+
+  @media (max-width:420px){
+    .client-name{font-size:16px;}
+    .lightbox .nav{width:38px; height:38px; font-size:17px;}
+  }
+</style>
+</head>
+<body>
+
+  <header>
+    <span class="brand">الوكالة</span>
+    <div class="client-name">صور KDH</div>
+    <span class="count" id="countLabel">— صورة</span>
+  </header>
+
+  <main>
+    <div class="sub">آخر تحديث: اليوم</div>
+    <div class="grid" id="grid"></div>
+  </main>
+
+  <footer>هذا الرابط خاص بك — الرجاء عدم مشاركته</footer>
+
+  <div class="lightbox" id="lightbox">
+    <span class="close" id="closeBtn">إغلاق ✕</span>
+    <span class="nav prev" id="prevBtn">‹</span>
+    <img id="lightboxImg" src="" alt="">
+    <span class="nav next" id="nextBtn">›</span>
+    <span class="counter" id="counter"></span>
+  </div>
+
+<script>
+  /* ====== عدّل هذي القائمة فقط ======
+     أسماء الملفات لازم تطابق بالضبط أسماء الصور اللي رفعتها داخل مجلد photos/
+     بما إنك رتبتها بنمط "KDH (1).jpg" فهذي هي القائمة الجاهزة على نفس النمط */
+  const photos = [
+    {src:"photos/KDH (1).jpg", isNew:true},
+    {src:"photos/KDH (2).jpg", isNew:true},
+    {src:"photos/KDH (3).jpg", isNew:true},
+    {src:"photos/KDH (4).jpg", isNew:false},
+    {src:"photos/KDH (5).jpg", isNew:false},
+    {src:"photos/KDH (6).jpg", isNew:false},
+  ];
+  /* =================================== */
+
+  const grid = document.getElementById('grid');
+  document.getElementById('countLabel').textContent = photos.length + ' صورة';
+
+  photos.forEach((p, i)=>{
+    const fig = document.createElement('figure');
+    if(p.isNew) fig.classList.add('new');
+    const img = document.createElement('img');
+    img.src = p.src;
+    img.loading = 'lazy';
+    img.alt = 'صورة ' + (i+1);
+    fig.appendChild(img);
+    fig.addEventListener('click', ()=>openLightbox(i));
+    grid.appendChild(fig);
+  });
+
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const counter = document.getElementById('counter');
+  const body = document.body;
+  let current = 0;
+
+  function openLightbox(i){
+    current = i;
+    updateLightbox();
+    lightbox.classList.add('open');
+    body.classList.add('locked');
+  }
+  function closeLightbox(){
+    lightbox.classList.remove('open');
+    body.classList.remove('locked');
+  }
+  function updateLightbox(){
+    lightboxImg.src = photos[current].src;
+    counter.textContent = (current+1) + ' / ' + photos.length;
+  }
+  function showPrev(){ current = (current-1+photos.length)%photos.length; updateLightbox(); }
+  function showNext(){ current = (current+1)%photos.length; updateLightbox(); }
+
+  document.getElementById('closeBtn').onclick = closeLightbox;
+  document.getElementById('prevBtn').onclick = showNext;   // RTL: السهم الأيمن = التالي بصريًا
+  document.getElementById('nextBtn').onclick = showPrev;
+  lightbox.addEventListener('click', e=>{ if(e.target===lightbox) closeLightbox(); });
+  document.addEventListener('keydown', e=>{
+    if(!lightbox.classList.contains('open')) return;
+    if(e.key==='Escape') closeLightbox();
+    if(e.key==='ArrowLeft') showPrev();
+    if(e.key==='ArrowRight') showNext();
+  });
+
+  /* سحب بالإصبع للتنقل بين الصور على الجوال */
+  let touchStartX = 0;
+  lightbox.addEventListener('touchstart', e=>{ touchStartX = e.changedTouches[0].screenX; }, {passive:true});
+  lightbox.addEventListener('touchend', e=>{
+    const dx = e.changedTouches[0].screenX - touchStartX;
+    if(Math.abs(dx) < 40) return;
+    if(dx > 0) showPrev(); else showNext();
+  }, {passive:true});
+</script>
+
+</body>
+</html>
