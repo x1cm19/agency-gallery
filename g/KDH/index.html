@@ -201,31 +201,27 @@
   </div>
 
 <script>
-  /* ====================================================
-     أضف الصور الجديدة دائماً في الأعلى (أول القائمة)
-     الصور الموجودة في الأعلى ستظهر أولاً في الموقع.
-     ==================================================== */
-  const photos = [
-    // 5 الصور الجديدة (تظهر في الأعلى):
-    {src:"photos/KDH (11).jpg", isNew:true},
-    {src:"photos/KDH (12).jpg", isNew:true},
-    {src:"photos/KDH (13).jpg", isNew:true},
-    {src:"photos/KDH (14).jpg", isNew:true},
-    {src:"photos/KDH (15).jpg", isNew:true},
+  /* ===================================================================
+     طريقة التوليد التلقائي (ارتاح من القروشة نهائياً):
+     1. totalPhotos: اكتب هنا إجمالي عدد الصور بالمجلد (حالياً 15).
+     2. newCount: كم عدد الصور الجديدة الأخيرة اللي تبغى عليها علامة NEW (حالياً 5).
+     
+     مستقبلاً لو ضفت 3 صور جديدة صار المجموع 18:
+     - خلّي totalPhotos = 18
+     - خلّي newCount = 3 (علشان الـ 3 الجديدة هي بس اللي عليها NEW، والباقي يرجع قديم تلقائي)
+     =================================================================== */
+  const totalPhotos = 15; 
+  const newCount = 5;     
 
-    // 10 الصور القديمة (تظهر بالأسفل):
-    {src:"photos/KDH (1).jpg", isNew:false},
-    {src:"photos/KDH (2).jpg", isNew:false},
-    {src:"photos/KDH (3).jpg", isNew:false},
-    {src:"photos/KDH (4).jpg", isNew:false},
-    {src:"photos/KDH (5).jpg", isNew:false},
-    {src:"photos/KDH (6).jpg", isNew:false},
-    {src:"photos/KDH (7).jpg", isNew:false},
-    {src:"photos/KDH (8).jpg", isNew:false},
-    {src:"photos/KDH (9).jpg", isNew:false},
-    {src:"photos/KDH (10).jpg", isNew:false},
-  ];
-  /* =================================================== */
+  const photos = [];
+  // بناء القائمة تلقائياً بحيث الأحدث يجي فوق
+  for (let i = totalPhotos; i >= 1; i--) {
+    photos.push({
+      src: `photos/KDH (${i}).jpg`,
+      isNew: i > (totalPhotos - newCount)
+    });
+  }
+  /* =================================================================== */
 
   const grid = document.getElementById('grid');
   document.getElementById('countLabel').textContent = photos.length + ' photos';
